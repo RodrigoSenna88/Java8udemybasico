@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 /**
@@ -24,8 +27,14 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @NotEmpty(message = "Task must be set")
+    @Size(min = 10, message = "Task should not be less tha 10 caracters")
     private String task;
+    
+    @FutureOrPresent(message = "Dude must be in the present or future")
     private LocalDate dueDate;
+    
+    
     private boolean isCompleted;
     private LocalDate dateCompleted;
     private LocalDate dateCreated;
